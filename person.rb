@@ -12,7 +12,7 @@ class Person < Nameable
   end
 
   # acessor getter
-  attr_reader :id
+  attr_reader :id, :rentals
 
   # accessor setter
   attr_accessor :name, :age

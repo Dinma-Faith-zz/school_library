@@ -5,6 +5,8 @@ require_relative './rental'
 require_relative './person'
 
 class App
+  attr_accessor :people, :books, :rentals
+
   def initialize
     @books = []
     @people = []
@@ -31,7 +33,7 @@ class App
     puts "Book created successfully\n"
   end
 
-  def student_age
+  def create_student
     print 'Age: '
     age = gets.chomp
     print 'Name: '
@@ -39,8 +41,9 @@ class App
     print 'Classroom:'
     classroom = gets.chomp
     print 'Has parent permission? [Y/N]: '
-    parent_permission = gets.chomp
-    student = Student.new(age, name, classroom, parent_permission)
+    parent_permission = gets.chomp.downcase
+    permission = parent_permission == 'Y'
+    student = Student.new(age, name, classroom, permission)
     @people.push(student)
     puts "Person created successfully\n"
   end
@@ -60,7 +63,7 @@ class App
     option = gets.chomp
     case option
     when '1'
-      student_age
+      create_student
     when '2'
       print 'Age: '
       age = gets.chomp
@@ -75,6 +78,7 @@ class App
   end
 
   def list_all_rental
+    puts 'Your Library is empty' if @people.empty? && @books.empty?
     print 'ID of person: '
     id = gets.chomp.to_i
 
@@ -88,12 +92,11 @@ class App
     end
 
     rentals.each do |rental|
-      print "Date: #{rental.date}, Book \'#{rental.book.title}\' by #{rental.book.author}\n"
+      print "Date: #{rental.date}, \'#{rental.book.title}\' by #{rental.book.author}\n"
     end
   end
 
   def create_rental
-    puts 'Your Library is empty' if @people.empty? && @books.empty?
     puts 'Select a book by number'
     @books.each_with_index do |book, i|
       print "#{i}) Title: #{book.title}, Author: #{book.author}\n"
@@ -111,7 +114,7 @@ class App
     person = @people[person_index]
     print "\nDate: "
     date = gets.chomp
-    rental = Rental.new(date, book, person)
+    rental = Rental.new(date, person, book)
     @rentals << rental
     puts "Rental created successfully\n"
   end
