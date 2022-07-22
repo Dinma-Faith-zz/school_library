@@ -1,6 +1,6 @@
 require_relative './app'
 
-def request
+public def request
   puts 'Please choose an option below :'
   puts '1 - List all books'
   puts '2 - List all people'
@@ -9,32 +9,35 @@ def request
   puts '5 - Create a rental'
   puts '6 - List all rentals for a given person id'
   puts '7 - Exit'
+  input = gets.chomp.to_s
 end
 
 puts 'Welcome to School Library App!'
 
-def actions
+public def actions(input_actions)
+  app = App.new
   case input_actions
   when '1'
-    list_all_books
+    app.list_all_books
   when '2'
-    list_all_people
+    app.list_all_people
   when '3'
-    create_person
+    app.create_person
   when '4'
-    create_book
+    app.create_book
   when '5'
-    create_rental
+    app.create_rental
   when '6'
-    list_all_rental
+    app.list_all_rental
   else
     puts 'Thank you for using this app'
   end
 end
 
 def main
-  app = App.new
-  app.request
+  input = request
+  actions(input)
+
 end
 
 main
