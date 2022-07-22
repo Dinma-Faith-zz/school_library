@@ -4,20 +4,6 @@ require_relative './book'
 require_relative './rental'
 require_relative './person'
 
-def student_age
-  print 'Age: '
-  age = gets.chomp
-  print 'Name: '
-  name = gets.chomp
-  print 'Classroom:'
-  classroom = gets.chomp
-  print 'Has parent permission? [Y/N]: '
-  parent_permission = gets.chomp
-  student = Student.new(age, name, classroom, parent_permission)
-  @people.push(student)
-  puts "Person created successfuly\n"
-end
-
 class App
   def initialize
     @books = []
@@ -43,6 +29,20 @@ class App
     book = Book.new(title, author)
     @books << book
     puts "Book created successfully\n"
+  end
+
+  def student_age
+    print 'Age: '
+    age = gets.chomp
+    print 'Name: '
+    name = gets.chomp
+    print 'Classroom:'
+    classroom = gets.chomp
+    print 'Has parent permission? [Y/N]: '
+    parent_permission = gets.chomp
+    student = Student.new(age, name, classroom, parent_permission)
+    @people.push(student)
+    puts "Person created successfully\n"
   end
 
   def list_all_people

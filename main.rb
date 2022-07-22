@@ -11,34 +11,30 @@ def request
   puts '7 - Exit'
 end
 
-def actions(input, app)
-  case input
+puts 'Welcome to School Library App!'
+
+def actions
+  case input_actions
   when '1'
-    app.list_all_books
+    list_all_books
   when '2'
-    app.list_all_people
+    list_all_people
   when '3'
-    app.create_person
+    create_person
   when '4'
-    app.create_book
+    create_book
   when '5'
-    app.create_rental
+    create_rental
   when '6'
-    app.list_all_rental
+    list_all_rental
+  else
+    puts 'Thank you for using this app'
   end
 end
 
 def main
-  puts "Welcome to School Library App!\n\n "
-  response = nil
   app = App.new
-  while response != '7'
-    request
-    response = gets.chomp
-    actions(response, app)
-    puts 'Thank you for using this app'
-    puts "\n"
-  end
+  app.request
 end
 
 main
