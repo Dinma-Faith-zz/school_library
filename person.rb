@@ -1,4 +1,5 @@
 require_relative './nameable'
+require_relative './rental'
 
 class Person < Nameable
   def initialize(age, name = 'unknown', parent_permission: true)
@@ -11,7 +12,7 @@ class Person < Nameable
   end
 
   # acessor getter
-  attr_reader :id
+  attr_reader :id, :rentals
 
   # accessor setter
   attr_accessor :name, :age
