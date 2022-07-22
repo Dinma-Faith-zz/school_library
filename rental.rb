@@ -1,4 +1,5 @@
 require_relative './book'
+require_relative './person'
 
 class Rental
   attr_accessor :date
@@ -6,12 +7,11 @@ class Rental
 
   def initialize(date, person, book)
     @date = date
-    @rentals = []
     @person = person
 
-    @person.rentals << self unless @person.rentals.include?(self)
+    person.rentals << self
 
     @book = book
-    @book.rentals << self unless @book.rentals.include?(self)
+    book.rentals << self
   end
 end
